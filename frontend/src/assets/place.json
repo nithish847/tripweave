@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "Name": "Buddha Park of Ravangla",
+    "State": "Sikkim",
+    "Image": "/images/1.jpg",
+    "Description": "A peaceful hilltop park featuring a massive Buddha statue, surrounded by panoramic views of the Himalayas."
+  },
+  {
+    "id": 2,
+    "Name": "Red Fort",
+    "State": "Delhi",
+    "Image": "/images/2jpg.jpg",
+    "Description": "An iconic UNESCO World Heritage site, the Red Fort stands as a symbol of India’s rich Mughal history and architecture."
+  },
+  {
+    "id": 3,
+    "Name": "Athirappilly Waterfalls",
+    "State": "Kerala",
+    "Image": "/images/3.jpeg",
+    "Description": "Known as the Niagara of India, Athirappilly is the largest waterfall in Kerala, surrounded by lush green forests."
+  },
+  {
+    "id": 4,
+    "Name": "Naini Lake",
+    "State": "Uttarakhand",
+    "Image": "/images/4.jpeg",
+    "Description": "A serene lake nestled among mountains in Nainital, perfect for boating and enjoying tranquil views."
+  },
+  {
+    "id": 5,
+    "Name": "Adiyogi Shiva Statue",
+    "State": "Tamil Nadu",
+    "Image": "/images/5.jpg",
+    "Description": "The world’s largest bust statue dedicated to Lord Shiva, located at the foothills of the Velliangiri Mountains in Coimbatore."
+  }
+]
