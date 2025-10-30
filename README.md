@@ -1,7 +1,7 @@
 # 🧳 TripWeave
 
 TripWeave is a smart travel management web app built with the **MERN Stack (MongoDB, Express, React, Node.js)**.  
-It helps users **plan, book, and manage** international trips with ease — all in one place.
+It helps users **plan, book, and manage** india trips with ease — all in one place.
 
 ## 🧩 Tech Stack
 
