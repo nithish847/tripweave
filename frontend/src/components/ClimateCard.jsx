@@ -22,7 +22,7 @@ import {
   Star,
   Compass
 } from "lucide-react";
-
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 // Gradient map for weather conditions
 const getConditionGradient = (condition) => {
   const map = {
@@ -264,7 +264,7 @@ const ClimateCard = () => {
   const fetchWeather = async (params) => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/weather", { params });
+      const res = await axios.get(`${API_URL}/weather`, { params });
       
       if (res.data.success) {
         setWeatherData(res.data);

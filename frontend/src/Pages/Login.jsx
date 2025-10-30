@@ -6,6 +6,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Eye, EyeOff, Loader } from "lucide-react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const Login = () => {
     dispatch(loginStart());
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/users/login", {
+      const { data } = await axios.post(`${API_URL}/users/login`, {
         email,
         password,
       });
@@ -140,5 +141,3 @@ const Login = () => {
 export default Login;
 
 
-
-//new one_->1

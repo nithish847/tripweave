@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, MapPin, Sparkles, Loader, Compass, Mountain, Castle, Waves, Tent, Crown, Palette } from "lucide-react";
 import DestinationCard from "../components/DestinationCard";
-
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 const tripTypes = [
   { name: "Nature", icon: Mountain, color: "from-emerald-500 to-teal-600" },
   { name: "Heritage", icon: Castle, color: "from-amber-500 to-orange-600" },
@@ -29,7 +29,7 @@ const Explore = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:5000/api/places/states");
+      const res = await fetch(`${API_URL}/places/states`);
       if (!res.ok) {
         throw new Error(`Failed to fetch states: ${res.status} ${res.statusText}`);
       }
@@ -46,7 +46,7 @@ const Explore = () => {
       setError("Failed to load destinations. Please try again later.");
       // Fallback: try the old endpoint
       try {
-        const res = await fetch("http://localhost:5000/api/places?limit=1000");
+        const res = await fetch(`${API_URL}/places?limit=1000`);
         if (res.ok) {
           const data = await res.json();
           if (data.success) {
@@ -80,7 +80,7 @@ const Explore = () => {
     setLoading(true);
     setError(null);
     try {
-      let url = "http://localhost:5000/api/places";
+      let url = `${API_URL}/places`;
       const params = new URLSearchParams();
       
       if (searchQuery) {

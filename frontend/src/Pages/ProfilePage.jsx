@@ -4,7 +4,11 @@ import axios from "axios";
 import { MapPin, Calendar, Camera, Heart, Edit3, Trash2, Loader, Mail, Globe, User, LogOut, Phone } from "lucide-react";
 import { updateUser, logout } from "../redux/authSlice";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+});
+
 
 // Add request interceptor for authentication
 API.interceptors.request.use(

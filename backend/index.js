@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Enable CORS
 app.use(cors({
-  origin: ["http://localhost:5173", "https://tripweave-1-f.onrender.com"], 
+  origin: "http://localhost:5173", 
   // frontend URL
   credentials: true,
 }));

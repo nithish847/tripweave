@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice";
 import { Eye, EyeOff, Loader } from "lucide-react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ const Signup = () => {
     setIsLoading(true);
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/users/register", {
+      const { data } = await axios.post(`${API_URL}/users/register`, {
         name: formData.name,
         username: formData.lastName, // Using lastName as username for now
         email: formData.email,

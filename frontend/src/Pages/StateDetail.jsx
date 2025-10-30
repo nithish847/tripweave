@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPlace, removePlace } from "../redux/itinerarySlice";
 import axios from "axios";
 import { selectIsAuthenticated } from "../redux/authSlice"; // ✅ Import auth selector
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const categories = ["All", "Nature", "Heritage", "Adventure", "Beach", "Cultural", "Modern"];
 
@@ -79,7 +80,7 @@ const StateDetail = () => {
     setLoading(true);
     setError(null);
     try {
-      let url = `http://localhost:5000/api/places/state/${encodeURIComponent(formattedStateName)}`;
+      let url = `${API_URL}/places/state/${encodeURIComponent(formattedStateName)}`;
       if (category !== "All") url += `/${encodeURIComponent(category)}`;
 
       const params = new URLSearchParams();
@@ -135,7 +136,7 @@ const StateDetail = () => {
       if (selectedPlaces.find((p) => p._id === id)) {
         // Remove place
         await axios.post(
-          "http://localhost:5000/api/itinerary/remove",
+          `${API_URL}/itinerary/remove`,
           { placeId: id },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -143,7 +144,7 @@ const StateDetail = () => {
       } else {
         // Add place
         await axios.post(
-          "http://localhost:5000/api/itinerary/add",
+          `${API_URL}/itinerary/add`,
           { placeIds: [id] },
           { headers: { Authorization: `Bearer ${token}` } }
         );

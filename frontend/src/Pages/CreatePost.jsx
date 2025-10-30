@@ -4,7 +4,10 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+});
+
 
 const CreatePost = ({ onPostCreated, onClose }) => {
   const token = useSelector((state) => state.auth.token);
