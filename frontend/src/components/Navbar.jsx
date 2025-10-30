@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,13 +5,15 @@ import { logout } from "../redux/authSlice";
 import { MapPin, Menu, X, User, LogOut, Settings } from "lucide-react";
 
 const Navbar = () => {
-  const [routeDropdown, setRouteDropdown] = useState(false);
+  const [routeDropdownDesktop, setRouteDropdownDesktop] = useState(false);
+  const [routeDropdownMobile, setRouteDropdownMobile] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.auth.isAuthenticated);
-  const user = useSelector(state => state.auth.user);
+  const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -35,9 +34,10 @@ const Navbar = () => {
   };
 
   const closeAllDropdowns = () => {
-    setRouteDropdown(false);
+    setRouteDropdownDesktop(false);
     setProfileDropdown(false);
     setMobileMenu(false);
+    setRouteDropdownMobile(false);
   };
 
   return (
@@ -45,10 +45,10 @@ const Navbar = () => {
       <nav className="bg-gradient-to-r from-pink-500 via-purple-600 to-blue-500 shadow-xl sticky top-0 z-50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-18">
-
+            
             {/* Logo */}
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="flex items-center gap-3 text-2xl font-bold text-white hover:scale-105 transition-transform duration-300"
               onClick={closeAllDropdowns}
             >
@@ -62,15 +62,15 @@ const Navbar = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-2 relative">
-              {navItems.map(item => (
+              {navItems.map((item) => (
                 <NavLink
                   key={item.name}
                   to={item.path}
                   onClick={closeAllDropdowns}
                   className={({ isActive }) =>
                     `px-4 py-2 rounded-2xl text-sm font-medium transition-all duration-300 ${
-                      isActive 
-                        ? "bg-white text-purple-600 shadow-lg transform scale-105" 
+                      isActive
+                        ? "bg-white text-purple-600 shadow-lg transform scale-105"
                         : "text-white hover:bg-white/20 hover:backdrop-blur-sm"
                     }`
                   }
@@ -83,25 +83,35 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => {
-                    setRouteDropdown(!routeDropdown);
+                    setRouteDropdownDesktop(!routeDropdownDesktop);
                     setProfileDropdown(false);
                   }}
-                  className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold rounded-2xl shadow-lg hover:from-yellow-500 hover:to-orange-600 hover:scale-105 transition-all duration-300"
+                  className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold rounded-2xl shadow-lg hover:scale-105 transition-all duration-300"
                 >
                   <MapPin className="w-4 h-4" />
                   Plan Journey
-                  <svg className={`w-4 h-4 transition-transform duration-200 ${routeDropdown ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      routeDropdownDesktop ? "rotate-180" : ""
+                    }`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
 
-                {routeDropdown && (
+                {routeDropdownDesktop && (
                   <div className="absolute mt-3 w-80 bg-white rounded-3xl shadow-2xl border border-gray-100 z-50 overflow-hidden">
                     <div className="p-4 bg-gradient-to-r from-purple-50 to-blue-50">
                       <h3 className="font-bold text-gray-800 text-lg mb-1">Planning Tools</h3>
                       <p className="text-gray-600 text-sm">AI-powered travel assistance</p>
                     </div>
-                    {routeItems.map(item => (
+                    {routeItems.map((item) => (
                       <NavLink
                         key={item.name}
                         to={item.path}
@@ -117,19 +127,19 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Auth Section */}
+            {/* Auth Section (Desktop) */}
             <div className="hidden md:flex items-center space-x-3">
               {isLoggedIn ? (
                 <div className="relative">
                   <button
                     onClick={() => {
                       setProfileDropdown(!profileDropdown);
-                      setRouteDropdown(false);
+                      setRouteDropdownDesktop(false);
                     }}
                     className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300"
                   >
                     <User className="w-5 h-5" />
-                    <span className="max-w-24 truncate">{user?.name || 'User'}</span>
+                    <span className="max-w-24 truncate">{user?.name || "User"}</span>
                   </button>
 
                   {profileDropdown && (
@@ -140,8 +150,8 @@ const Navbar = () => {
                             <User className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <div className="font-semibold text-gray-800">{user?.name || 'User'}</div>
-                            <div className="text-sm text-gray-600">{user?.email || 'user@example.com'}</div>
+                            <div className="font-semibold text-gray-800">{user?.name || "User"}</div>
+                            <div className="text-sm text-gray-600">{user?.email || "user@example.com"}</div>
                           </div>
                         </div>
                       </div>
@@ -175,7 +185,10 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setMobileMenu(!mobileMenu)}
+              onClick={() => {
+                setMobileMenu(!mobileMenu);
+                setRouteDropdownMobile(false);
+              }}
               className="md:hidden p-2 text-white hover:bg-white/20 rounded-xl transition-colors"
             >
               {mobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -187,11 +200,11 @@ const Navbar = () => {
         {mobileMenu && (
           <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-white/20">
             <div className="px-4 py-3 space-y-2">
-              {navItems.map(item => (
+              {navItems.map((item) => (
                 <NavLink
                   key={item.name}
                   to={item.path}
-                  onClick={() => setMobileMenu(false)}
+                  onClick={closeAllDropdowns}
                   className={({ isActive }) =>
                     `block px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
                       isActive
@@ -204,29 +217,35 @@ const Navbar = () => {
                 </NavLink>
               ))}
 
-              {/* Planning Tools Accordion */}
+              {/* Planning Tools Accordion (Mobile Only) */}
               <div className="border-t border-gray-200 pt-3 mt-3">
                 <button
-                  onClick={() => setRouteDropdown(!routeDropdown)}
+                  onClick={() => setRouteDropdownMobile(!routeDropdownMobile)}
                   className="w-full flex items-center justify-between px-4 py-3 bg-gray-100 rounded-xl font-medium text-gray-700 hover:bg-gray-200 transition-colors"
                 >
                   <span>Planning Tools</span>
                   <svg
-                    className={`w-4 h-4 transition-transform duration-200 ${routeDropdown ? 'rotate-180' : ''}`}
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      routeDropdownMobile ? "rotate-180" : ""
+                    }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
 
-                {routeDropdown && (
+                {routeDropdownMobile && (
                   <div className="mt-2 space-y-1 px-2">
-                    {routeItems.map(item => (
+                    {routeItems.map((item) => (
                       <NavLink
                         key={item.name}
                         to={item.path}
-                        onClick={() => setMobileMenu(false)}
+                        onClick={closeAllDropdowns}
                         className="block px-4 py-2 text-gray-700 rounded-lg hover:bg-purple-50 transition-colors"
                       >
                         <div className="font-medium">{item.name}</div>
@@ -237,7 +256,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* Auth Section */}
+              {/* Auth Section (Mobile) */}
               <div className="border-t border-gray-200 pt-3 mt-3">
                 {isLoggedIn ? (
                   <button
@@ -250,7 +269,7 @@ const Navbar = () => {
                 ) : (
                   <NavLink
                     to="/login"
-                    onClick={() => setMobileMenu(false)}
+                    onClick={closeAllDropdowns}
                     className="block px-4 py-3 bg-purple-600 text-white rounded-xl font-medium text-center"
                   >
                     Get Started
@@ -262,9 +281,9 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* Backdrop for dropdowns */}
-      {(routeDropdown || profileDropdown) && (
-        <div 
+      {/* Backdrop */}
+      {(routeDropdownDesktop || profileDropdown) && (
+        <div
           className="fixed inset-0 z-40 bg-black/10"
           onClick={closeAllDropdowns}
         />
@@ -274,4 +293,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

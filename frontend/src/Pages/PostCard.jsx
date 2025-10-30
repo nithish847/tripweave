@@ -1,6 +1,3 @@
-
-//new-one-1
-
 import React, { useEffect, useState, useCallback } from "react";
 import {
   Heart,

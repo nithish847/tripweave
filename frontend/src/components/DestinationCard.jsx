@@ -1,4 +1,4 @@
-//new ->1
+
 import React, { useState, useEffect } from 'react';
 import { Star, MapPin, IndianRupee, Heart, Users, Clock, Plus, Info, Calendar, CloudSnow } from 'lucide-react';
 

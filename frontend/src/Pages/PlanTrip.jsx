@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 import BudgetCard from '../components/BudgetCard';
 import RouteCard from '../components/RouteCard';

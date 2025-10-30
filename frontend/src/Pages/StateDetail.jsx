@@ -1,5 +1,3 @@
-
-//new updated->1
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader, MapPin, DollarSign, Navigation, Wallet, Star, Filter } from "lucide-react";

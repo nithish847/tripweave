@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://www.gravatar.com/avatar/?d=mp",
     },
-    avatarPublicId: { type: String }, // store Cloudinary public_id for deletion
+    avatarPublicId: { type: String }, 
 
     // Optional details
     country: { type: String },
