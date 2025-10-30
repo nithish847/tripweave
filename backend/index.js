@@ -19,7 +19,7 @@ app.use(express.json());
 // Enable CORS
 const allowedOrigins = [
   "http://localhost:5173",             
-  "https://tripweave-f.onrender.com",   
+  "https://tripweave-frontend.onrender.com",   
 ];
 
 app.use(cors({
